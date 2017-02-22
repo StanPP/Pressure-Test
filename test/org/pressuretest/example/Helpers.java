@@ -14,9 +14,6 @@ public class Helpers {
 		// seconds)
 		// otherwise returns false if page still not ready when timeout expires
 		
-		
-		Thread.sleep(5000);
-		
 		boolean pageLoadedandReady = false;
 
 		Integer defaultTimeout = Const.DEFAULTTIMEOUT; // In Seconds - See Helpers for current value
