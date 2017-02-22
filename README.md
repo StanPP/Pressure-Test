@@ -45,5 +45,5 @@ After 21:00 in the evening, this value disappears from the page for the current 
 Have tried to avoid just putting in sleep timers, whilst pages load, but still have seen some issues where the objects are available and can be used, but the page is still catching up and not ready.
 
 
-The AddABrowser stream has been created, this is to a test that works with Mozilla FireFox and MS Edge as well as reducing the amount of code by consolidating common code.
+The AddABrowser stream has been created, this is to have a test that works with Mozilla FireFox and MS Edge as well as reducing the amount of code by consolidating common code.
 
