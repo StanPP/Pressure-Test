@@ -15,7 +15,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,16 +27,7 @@ import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-/*
- * 
- * 
- *   FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX  FIREFOX 
- * 
- * 
- * 
- */
-
-public class PressureTest {
+public class PressureTestForEdge {
 	private WebDriver driver;
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -48,20 +38,16 @@ public class PressureTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// Currently setup to use Mozilla Firefox
+		System.setProperty("webdriver.edge.driver",	Const.EDGEDRIVERLOCATION);
 
-		// System.setProperty("webdriver.edge.driver",
-		// "C:\\W10Webdrivers\\MicrosoftWebDriver.exe");
-		System.setProperty("webdriver.gecko.driver", Const.GECKODRIVERLOCATION);
+		driver = new EdgeDriver();
 
-		// driver = new EdgeDriver();
-		driver = new FirefoxDriver();
 		baseUrl = "http://www.bbc.co.uk/weather/";
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	}
 
 	@Test
-	public void testWeatherPageFirefox() throws Exception {
+	public void testWeatherPageForEdge() throws Exception {
 		String errorMessage = "No error";
 		boolean pageIsReady = false;
 
@@ -94,8 +80,8 @@ public class PressureTest {
 
 				Elements tableElements = doc.select("table.weather");
 
-				String timeToFind = Const.TIMETOFIND; // 21:00 - 9pm (Gives flexibility on
-													  // the required time)
+				String timeToFind = Const.TIMETOFIND; 	// 21:00 - 9pm (Gives flexibility on
+														// the required time)
 				Integer timeColumnIndex = 0;
 				String pressureAtGivenTime = "Not Set";
 
@@ -220,6 +206,7 @@ public class PressureTest {
 			System.out.println(errorMessage);
 			fail(errorMessage);
 		}
+
 	}
 
 	@After
@@ -237,21 +224,6 @@ public class PressureTest {
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
-		}
-	}
-
-	public static void main(String args[]) {
-		JUnitCore junit = new JUnitCore();
-		junit.addListener(new TextListener(System.out));
-		Result result = junit.run(PressureTest.class); // Replace "SampleTest"
-														// with the name of your
-														// class
-		if (result.getFailureCount() > 0) {
-			System.out.println("Test failed.");
-			System.exit(1);
-		} else {
-			System.out.println("Test finished successfully.");
-			System.exit(0);
 		}
 	}
 
